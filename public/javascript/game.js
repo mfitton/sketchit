@@ -4,9 +4,9 @@ $( function (){
   var ctx = canvas[0].getContext('2d');
   var active = false;
   var index = 0;
-  xpos = [];
-  ypos = [];
-  connected = [];
+  var xpos = [];
+  var ypos = [];
+  var connected = [];
   canvas.on("mousedown", function(e){
     active = true;
     recordPosition(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, false);
@@ -19,11 +19,14 @@ $( function (){
     active = false;
   });
   canvas.on("mousemove", function(e){
+    console.log('hit to mousemove, active is '+active);
     if(active === true){
       recordPosition(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, true);
       draw();
     }
   });
+
+  $('#clear_button').on('click', clear);
 
   function recordPosition(x, y, connect){
     xpos.push(x);
@@ -45,5 +48,14 @@ $( function (){
       ctx.stroke();
       index++;
     }
+  }
+
+  function clear(){
+    console.log("clear clicked");
+    xpos = [];
+    ypos = [];
+    connected = [];
+    ctx.clearRect(0, 0, canvas.attr('width'), canvas.attr('height'));
+    index = 0;
   }
 });
