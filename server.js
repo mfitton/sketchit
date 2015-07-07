@@ -3,6 +3,7 @@ var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
+var connectionNum = 1;
 app.use(express.static('public'));
 
 app.get('/', function (req, res) {
@@ -13,13 +14,16 @@ var port = process.env.port || 4000;
 
 
 io.on('connection', function(socket){
-  console.log('A user connected');
-  socket.emit('news', {hello: 'world'});
+  console.log('A user connected, number: '+connectionNum);
+  var id = connectionNum;
+  connectionNum++;
+  // socket.emit('news', {hello: 'world'});
   socket.on('new position', function(data){
-    console.log(data);
+    // console.log(data);
+    socket.broadcast.emit('new position', data);
   });
   socket.on('clear', function(data){
-    console.log('clear')
+    console.log('clear');
   });
 });
 

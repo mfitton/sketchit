@@ -10,8 +10,11 @@ $( function (){
 
   //SOCKET STUFF
   var socket = io();
-  socket.on('news', function(data){
-    console.log(data);
+  socket.on('new position', function(pos){
+    xpos.push(pos['xpos']);
+    ypos.push(pos['ypos']);
+    connected.push(pos['connect']);
+    draw();
   });
 
   canvas.on("mousedown", function(e){
