@@ -7,19 +7,29 @@ $( function (){
   var xpos = [];
   var ypos = [];
   var connected = [];
+
+  //SOCKET STUFF
+  var socket = io();
+  socket.on('news', function(data){
+    console.log(data);
+  });
+
   canvas.on("mousedown", function(e){
     active = true;
     recordPosition(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, false);
     draw();
   });
+
   canvas.on("mouseup", function(){
     active = false;
   });
+
   canvas.on("mouseleave", function(){
     active = false;
   });
+
   canvas.on("mousemove", function(e){
-    console.log('hit to mousemove, active is '+active);
+    // console.log('hit to mousemove, active is '+active);
     if(active === true){
       recordPosition(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, true);
       draw();
@@ -32,6 +42,7 @@ $( function (){
     xpos.push(x);
     ypos.push(y);
     connected.push(connect);
+    socket.emit('new position', { 'xpos':x, 'ypos':y, 'connect':connect } );
   }
 
   function draw(){
@@ -57,5 +68,6 @@ $( function (){
     connected = [];
     ctx.clearRect(0, 0, canvas.attr('width'), canvas.attr('height'));
     index = 0;
+    socket.emit('clear', {});
   }
 });
