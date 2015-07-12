@@ -2,7 +2,7 @@ var express = require('express');
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-
+var verbose = true;
 var connectionNum = 1;
 app.use(express.static('public'));
 
@@ -17,14 +17,18 @@ io.on('connection', function(socket){
   console.log('A user connected, number: '+connectionNum);
   var id = connectionNum;
   connectionNum++;
-  // socket.emit('news', {hello: 'world'});
   socket.on('new position', function(data){
-    // console.log(data);
+    if(verbose)  console.log(data);
     socket.broadcast.emit('new position', data);
   });
   socket.on('clear', function(data){
-    console.log('clear');
+    console.log('emitting a clear');
+    socket.broadcast.emit('clear', data);
   });
+  socket.on('new guess', function(data){
+    if(verbose)  console.log(data);
+  });
+
 });
 
 http.listen(port, function(){
