@@ -26,7 +26,8 @@ io.on('connection', function(socket){
     socket.broadcast.emit('clear', data);
   });
   socket.on('new guess', function(data){
-    if(verbose)  console.log(data);
+    if(verbose)  console.log('new guess' + data);
+    socket.broadcast.emit('new guess', data);
   });
 
 });
