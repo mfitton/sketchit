@@ -1,13 +1,22 @@
 var express = require('express');
 var app = express();
+var jsonParser = require('body-parser').json();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var verbose = true;
 var connectionNum = 1;
+var users = [];
+
+//Combine these eventually
 app.use(express.static('public'));
+app.use(jsonParser);
 
 app.get('/', function (req, res) {
   res.sendfile(__dirname + '/index.html');
+});
+
+app.post('/sessions', function (req, res){
+  console.log(req.body);
 });
 
 var port = process.env.port || 4000;

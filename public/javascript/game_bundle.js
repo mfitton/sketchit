@@ -124,4 +124,4 @@ module.exports = function() {
   return 1;
 }
 
-},{}]},{},[1]);
+},{}]},{},[1,2]);
