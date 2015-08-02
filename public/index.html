@@ -10,11 +10,11 @@
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
     </head>
     <body>
-      Welcome to sketchit, please choose a user name.
-        <input id='username' type='text'>
-
-        <button id='choose-username'>Choose Name</button>
-
+      <h2> Welcome to sketchit, please choose a user name. </h2>
+        <form action='/sessions/new' method='POST'>
+            <input name='username' type='text'>
+            <input type='submit'>
+        </form>
 
         <!-- Add your site or application content here -->
         <script src="https://cdn.socket.io/socket.io-1.3.5.js"></script>
