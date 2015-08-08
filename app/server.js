@@ -1,11 +1,12 @@
 var express = require('express');
+var UUID = require('uuid');
+require('./User.js')();
 var app = express();
 var jsonParser = require('body-parser').json();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var verbose = true;
-var connectionNum = 1;
-var users = [];
+var usersLookingForGame = [];
 
 
 
@@ -28,12 +29,10 @@ var port = process.env.port || 3400;
 
 
 io.on('connection', function(socket){
-  console.log('A user connected, number: '+connectionNum);
-  var id = connectionNum;
-  connectionNum++;
+  var id = UUID.v1();
   socket.on('new position', onNewPosition);
   socket.on('clear', onClear);
-  socket.on('new guess', onGuess);
+  socket.on('new guess', onNewGuess);
 });
 
 http.listen(port, function(){
@@ -42,17 +41,17 @@ http.listen(port, function(){
 
 function onNewPosition(data) {
   if(verbose)  console.log(data);
-  socket.broadcast.emit('new position', data);
+  this.broadcast.emit('new position', data);
 }
 
 function onClear(data){
   console.log('emitting a clear');
-  socket.broadcast.emit('clear', data);
+  this.broadcast.emit('clear', data);
 }
 
 function onNewGuess(data) {
   if(verbose)  console.log('new guess' + data);
-  socket.broadcast.emit('new guess', data);
+  this.broadcast.emit('new guess', data);
 }
 exports = module.exports = app;
 
