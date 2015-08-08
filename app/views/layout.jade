@@ -5,13 +5,16 @@ html.no-js
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     block title
         title Default title
-    meta(name='description', content='')
+    block scripts
+        script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js')
+        script(src='https://cdn.socket.io/socket.io-1.3.5.js')
+        script(src='https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.18/require.js')
+
+    meta(name='description', content='An image sketching and guessing game')
     meta(name='viewport', content='width=device-width, initial-scale=1')
-    link(rel='stylesheet', href='stylesheets/normalize.css')
-    link(rel='stylesheet', href='stylesheets/main.css')
-    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js')
-    script(src='https://cdn.socket.io/socket.io-1.3.5.js"')
-    script(src='https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.18/require.js')
+    link(rel='stylesheet', href='/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/css/bootstrap-theme.min.css')
+    link(rel='stylesheet', href='/css/main.css')
 
     //-script(src='javascripts/vendor/modernizr-2.7.1.min.js')
   body

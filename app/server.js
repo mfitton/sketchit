@@ -16,15 +16,15 @@ app.use(express.static('public'));
 app.use(jsonParser);
 
 app.get('/', function (req, res) {
-  res.render('layout.jade');
+  res.render('index.jade');
 });
 
 app.post('/sessions/new', function (req, res){
   console.log(req);
-  res.render('game');
+  res.render('game.jade');
 });
 
-var port = process.env.port || 3000;
+var port = process.env.port || 3400;
 
 
 io.on('connection', function(socket){

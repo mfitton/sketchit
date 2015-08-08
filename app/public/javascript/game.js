@@ -1,4 +1,4 @@
-$( function (){
+`$( function (){
   console.log("The init function ran");
   var canvas = $('#practice-screen');
   var ctx = canvas[0].getContext('2d');

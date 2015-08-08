@@ -1,0 +1,14 @@
+extends layout.jade
+
+append scripts
+	script(src='/javascript/game_bundle.js')
+
+block content
+	h3 Welcome to the site, you should be able to draw on the canvas below.
+	canvas#practice-screen(height='400', width='400')
+
+	input#guess-box(type='text')
+	button#guess-button Make Guess 
+	button#clear-button Clear
+
+	table#guesses

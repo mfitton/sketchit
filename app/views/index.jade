@@ -1,0 +1,7 @@
+extends layout.jade
+
+block content
+	h2 Welcome to sketchit, please choose a user name.
+	form(action='/sessions/new', method='POST')
+		input(name='username', type='text')
+		input(type='submit')
